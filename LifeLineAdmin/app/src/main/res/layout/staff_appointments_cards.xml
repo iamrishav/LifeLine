@@ -46,14 +46,15 @@
                 android:paddingTop="3dp"
                 android:text="Time"
                 android:textSize="30dp" />
+
             <TextView
                 android:id="@+id/appointmentProblem"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingTop="3dp"
                 android:layout_weight="1"
+                android:paddingTop="3dp"
                 android:text="PRoblem"
-                android:textSize="30dp"/>
+                android:textSize="30dp" />
         </LinearLayout>
 
     </LinearLayout>

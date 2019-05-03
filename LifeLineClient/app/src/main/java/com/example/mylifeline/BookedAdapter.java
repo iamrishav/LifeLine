@@ -35,7 +35,7 @@ public class BookedAdapter extends RecyclerView.Adapter<BookedAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
 
-        BookedListItem currentItem  = mDoctorsList.get(i);
+        BookedListItem currentItem = mDoctorsList.get(i);
 
         viewHolder.doctorName.setText(currentItem.getmDoctorNAme());
         viewHolder.time.setText(currentItem.getmTime());
@@ -52,10 +52,10 @@ public class BookedAdapter extends RecyclerView.Adapter<BookedAdapter.ViewHolder
         return mDoctorsList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView doctorName,date,time,problem,status;
         View itemView;
+        private TextView doctorName, date, time, problem, status;
 
 
         public ViewHolder(@NonNull View itemView) {

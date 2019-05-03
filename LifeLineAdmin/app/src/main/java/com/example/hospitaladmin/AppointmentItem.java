@@ -9,14 +9,14 @@ public class AppointmentItem {
     private String mtime;
     private String mproblem;
 
-    public String getMproblem() {
-        return mproblem;
-    }
-
     public AppointmentItem(String mname, String mtime, String mproblem) {
         this.mname = mname;
         this.mtime = mtime;
         this.mproblem = mproblem;
+    }
+
+    public String getMproblem() {
+        return mproblem;
     }
 
     public String getMname() {

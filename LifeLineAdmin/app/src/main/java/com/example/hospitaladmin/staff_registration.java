@@ -2,6 +2,7 @@ package com.example.hospitaladmin;
 /**
  * Created by Rishabh Gupta on 29-03-2019
  */
+
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -48,14 +49,13 @@ public class staff_registration extends AppCompatActivity {
     public TimePicker spinnerTime, spinnerTime1;
     StorageReference mStorage = FirebaseStorage.getInstance().getReference();
     ProgressDialog progressDialog;
-    String imageUrl, hospitalName = null;
+    String imageUrl="image not set", hospitalName = null;
     private FirebaseDatabase db = FirebaseDatabase.getInstance();
     private DatabaseReference rootRef = db.getReference();
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser = mAuth.getCurrentUser();
-    private DatabaseReference userRef = rootRef.child("hospital_lists").child(firebaseUser.getUid()).child("staff_lists");
     DatabaseReference hospitalRef = rootRef.child("hospital_lists").child(firebaseUser.getUid()).child("hospital_admin");
-
+    private DatabaseReference userRef = rootRef.child("hospital_lists").child(firebaseUser.getUid()).child("staff_lists");
     private DatabaseReference userRef2 = rootRef.child("staff_login");
     private DatabaseReference myUserRef = rootRef.child("hospital_staff_lists");
     private EditText staffName, staffEmail, staffPassword, staffdegrees, staffWorking, staffMobile, staffCabin;
@@ -184,41 +184,46 @@ public class staff_registration extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == Gallery) {
-            progressDialog.setMessage("Uploading....");
-            Uri uri = data.getData();
-            progressDialog.show();
-            staffImage.setImageURI(uri);
+
+        try {
+            if (requestCode == Gallery) {
+                progressDialog.setMessage("Uploading....");
+                Uri uri = data.getData();
+                progressDialog.show();
+                staffImage.setImageURI(uri);
 
 
-            final StorageReference fileName = mStorage.child("Photos/staffImages" + uri.getLastPathSegment() + ".png");
-            fileName.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(staff_registration.this, "Upload Done", Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
-                    fileName.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            imageUrl = uri.toString();
+                final StorageReference fileName = mStorage.child("Photos/staffImages" + uri.getLastPathSegment() + ".png");
+                fileName.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Toast.makeText(staff_registration.this, "Upload Done", Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                        fileName.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                imageUrl = uri.toString();
 
-                        }
+                            }
 
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
 
-                        }
-                    });
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(staff_registration.this, "Failed", Toast.LENGTH_SHORT).show();
-                }
-            });
+                            }
+                        });
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(staff_registration.this, "Failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
 
+            }
+        } catch (Exception e) {
+            imageUrl = "Image not found";
         }
 
     }

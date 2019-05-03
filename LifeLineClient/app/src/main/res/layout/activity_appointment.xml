@@ -37,14 +37,12 @@
                 android:layout_marginEnd="8dp" />
 
 
-
-
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="cursive"
                 android:layout_marginTop="15dp"
+                android:fontFamily="cursive"
                 android:text="Pick Your Time"
                 android:textAlignment="center"
                 android:textAllCaps="true"
@@ -64,8 +62,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
                 android:layout_marginTop="15dp"
+                android:layout_marginEnd="8dp"
                 android:ems="10"
                 android:hint="About Your Problem.. "
                 android:inputType="textMultiLine" />

@@ -48,7 +48,6 @@ public class RegisteredHospitalList extends AppCompatActivity {
         adapter.notifyDataSetChanged();
 
 
-
     }
 
     private void getData() {
@@ -58,17 +57,17 @@ public class RegisteredHospitalList extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 //                for(DataSnapshot dataSnapshot1 :dataSnapshot.getChildren()) {
-                    String name = dataSnapshot.child("details").child("hospitalName").getValue().toString();
-                    String address = dataSnapshot.child("details").child("hospitalAddress").getValue().toString();
-                    String city = dataSnapshot.child("details").child("hospitalCity").getValue().toString();
+                String name = dataSnapshot.child("details").child("hospitalName").getValue().toString();
+                String address = dataSnapshot.child("details").child("hospitalAddress").getValue().toString();
+                String city = dataSnapshot.child("details").child("hospitalCity").getValue().toString();
 
-                    Log.d(TAG, "test" + getIntent().getStringExtra("city"));
-                    Log.d(TAG, "test1" + city);
-                    String myCity = getIntent().getStringExtra("city");
+                Log.d(TAG, "test" + getIntent().getStringExtra("city"));
+                Log.d(TAG, "test1" + city);
+                String myCity = getIntent().getStringExtra("city");
 
-                    if (String.valueOf(city).toLowerCase().equals(String.valueOf(myCity).toLowerCase())) {
-                        hospitalListItems.add(new HospitalListItem(name, address));
-                        adapter.notifyDataSetChanged();
+                if (String.valueOf(city).toLowerCase().equals(String.valueOf(myCity).toLowerCase())) {
+                    hospitalListItems.add(new HospitalListItem(name, address));
+                    adapter.notifyDataSetChanged();
 //                    }
 
                 }

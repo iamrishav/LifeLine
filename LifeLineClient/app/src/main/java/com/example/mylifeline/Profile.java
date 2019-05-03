@@ -21,14 +21,14 @@ import java.util.HashMap;
 
 public class Profile extends AppCompatActivity {
 
-    private EditText bloodGroup,firstName,lastName, gender,address,state,country,pincode,email,mobile;
-    private Button done;
-
     FirebaseDatabase mAuth = FirebaseDatabase.getInstance();
     DatabaseReference rootRef = mAuth.getReference();
     DatabaseReference userRef = rootRef.child("profile");
+    private EditText bloodGroup, firstName, lastName, gender, address, state, country, pincode, email, mobile;
+    private Button done;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,30 +57,26 @@ public class Profile extends AppCompatActivity {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HashMap<String,String> hashMap = new HashMap<>();
-                hashMap.put("bloodGroup",bloodGroup.getText().toString());
-                hashMap.put("firstName",firstName.getText().toString());
-                hashMap.put("lastName",lastName.getText().toString());
-                hashMap.put("gender",gender.getText().toString());
-                hashMap.put("address",address.getText().toString());
-                hashMap.put("state",state.getText().toString());
-                hashMap.put("country",country.getText().toString());
-                hashMap.put("pincode",pincode.getText().toString());
-                hashMap.put("email",email.getText().toString());
-                hashMap.put("mobile",mobile.getText().toString());
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put("bloodGroup", bloodGroup.getText().toString());
+                hashMap.put("firstName", firstName.getText().toString());
+                hashMap.put("lastName", lastName.getText().toString());
+                hashMap.put("gender", gender.getText().toString());
+                hashMap.put("address", address.getText().toString());
+                hashMap.put("state", state.getText().toString());
+                hashMap.put("country", country.getText().toString());
+                hashMap.put("pincode", pincode.getText().toString());
+                hashMap.put("email", email.getText().toString());
+                hashMap.put("mobile", mobile.getText().toString());
                 userRef.child(mobile.getText().toString()).setValue(hashMap);
-                Toast.makeText(Profile.this,"updated succesfully",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(Profile.this,Dashoboard.class);
+                Toast.makeText(Profile.this, "updated succesfully", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Profile.this, Dashoboard.class);
                 startActivity(intent);
             }
         });
 
 
-
-
     }
-
-
 
 
 }

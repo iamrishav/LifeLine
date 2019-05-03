@@ -99,7 +99,6 @@ public class AvailableDoctorsList extends AppCompatActivity implements Navigatio
         setRecyclerView();
 
 
-
     }
 
     @Override
@@ -115,25 +114,26 @@ public class AvailableDoctorsList extends AppCompatActivity implements Navigatio
                 startActivity(intent1);
                 break;
             case R.id.nav_TrackHospitals:
-                Intent intent2 = new Intent(AvailableDoctorsList.this,HospitalLoacator.class);
+                Intent intent2 = new Intent(AvailableDoctorsList.this, HospitalLoacator.class);
                 startActivity(intent2);
                 break;
             case R.id.nav_PreviousAppointments:
-                Intent intent3 = new Intent(AvailableDoctorsList.this,BookedAppointments.class);
+                Intent intent3 = new Intent(AvailableDoctorsList.this, BookedAppointments.class);
                 startActivity(intent3);
                 break;
             case R.id.nav_BookAppointments:
-                Intent intent4 = new Intent(AvailableDoctorsList.this,FindDoctor.class);
+                Intent intent4 = new Intent(AvailableDoctorsList.this, FindDoctor.class);
                 startActivity(intent4);
                 break;
             case R.id.nav_manage:
-                Intent intent5 = new Intent(AvailableDoctorsList.this,AboutLifeLine.class);
+                Intent intent5 = new Intent(AvailableDoctorsList.this, AboutLifeLine.class);
                 startActivity(intent5);
                 break;
         }
 
         return false;
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

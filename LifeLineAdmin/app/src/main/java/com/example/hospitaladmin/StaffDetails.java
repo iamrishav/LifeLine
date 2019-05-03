@@ -1,10 +1,10 @@
 package com.example.hospitaladmin;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,18 +20,18 @@ import com.google.firebase.database.FirebaseDatabase;
 public class StaffDetails extends AppCompatActivity {
 
 
-    private TextView name,email,password,degrees,speciality,mobile,cabin;
-    private Button edit,delete;
+    private TextView name, email, password, degrees, speciality, mobile, cabin;
+    private Button edit, delete;
 
     private FirebaseDatabase db = FirebaseDatabase.getInstance();
     private DatabaseReference rootRef = db.getReference();
+    DatabaseReference userRef3 = rootRef.child("hospital_staff_lists");
+    DatabaseReference appointmentRef = rootRef.child("appointment");
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser = mAuth.getCurrentUser();
     private DatabaseReference userRef = rootRef.child("hospital_lists").child(firebaseUser.getUid()).child("staff_lists");
     private DatabaseReference userRef2 = rootRef.child("staff_login");
-    DatabaseReference userRef3 = rootRef.child("hospital_staff_lists");
     private DatabaseReference userRef4 = rootRef.child("hospital_lists").child(firebaseUser.getUid()).child("hospital_admin");
-    DatabaseReference appointmentRef = rootRef.child("appointment");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +51,6 @@ public class StaffDetails extends AppCompatActivity {
         final String myName = getIntent().getStringExtra("name");
 
 
-
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,7 +63,7 @@ public class StaffDetails extends AppCompatActivity {
 
                         String doctorname = dataSnapshot.child("staffName").getValue().toString();
 
-                        if(myName.equals(doctorname)){
+                        if (myName.equals(doctorname)) {
                             final String mobile = dataSnapshot.child("staffMobile").getValue().toString();
                             final String myMobile = mobile;
                             userRef.child(mobile).removeValue();
@@ -103,7 +102,7 @@ public class StaffDetails extends AppCompatActivity {
                             @Override
                             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                                 String myDoctor = dataSnapshot.child("doctorName").getValue().toString();
-                                if(myName.equals(myDoctor)){
+                                if (myName.equals(myDoctor)) {
                                     String problem = dataSnapshot.child("problem").getValue().toString();
                                     appointmentRef.child(problem).removeValue();
                                 }
@@ -130,7 +129,7 @@ public class StaffDetails extends AppCompatActivity {
                             }
                         });
 
-                        Intent intent = new Intent(StaffDetails.this,dashboard.class);
+                        Intent intent = new Intent(StaffDetails.this, dashboard.class);
                         startActivity(intent);
                         finish();
                     }
@@ -162,7 +161,7 @@ public class StaffDetails extends AppCompatActivity {
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =  new Intent(StaffDetails.this,staff_registration.class);
+                Intent intent = new Intent(StaffDetails.this, staff_registration.class);
                 startActivity(intent);
             }
         });
@@ -172,10 +171,9 @@ public class StaffDetails extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
 
-
                 String doctorname = dataSnapshot.child("staffName").getValue().toString();
 
-                if(myName.equals(doctorname)){
+                if (myName.equals(doctorname)) {
 
                     name.setText(doctorname);
                     email.setText(dataSnapshot.child("staffEmail").getValue().toString());

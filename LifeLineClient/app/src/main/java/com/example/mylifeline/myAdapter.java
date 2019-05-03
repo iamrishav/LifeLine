@@ -51,6 +51,7 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.ViewHolder> {
             public void onClick(View v) {
                 Intent intent = new Intent(ctx, RegisteredHospitalsDetails.class);
                 intent.putExtra("hospitalName", currentItem.getmName());
+
                 ctx.startActivity(intent);
 
             }

@@ -28,7 +28,7 @@ public class StaffDoctorsDetails extends AppCompatActivity {
     FirebaseDatabase db = FirebaseDatabase.getInstance();
     DatabaseReference rootRef = db.getReference();
     private ImageView staffImage;
-    private TextView StaffName, StaffAddress, StaffPhone, StaffHours, StaffSpeciality, StaffDegrees, StaffCabin,StaffEmail;
+    private TextView StaffName, StaffAddress, StaffPhone, StaffHours, StaffSpeciality, StaffDegrees, StaffCabin, StaffEmail;
     private Button staffBook, staffCall;
 
     @Override
@@ -57,7 +57,7 @@ public class StaffDoctorsDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Intent.ACTION_DIAL);
-                i.setData(Uri.parse("tel:"+staffMobile));
+                i.setData(Uri.parse("tel:" + staffMobile));
                 startActivity(i);
             }
         });
@@ -67,8 +67,8 @@ public class StaffDoctorsDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent1 = new Intent(StaffDoctorsDetails.this, Appointment.class);
-                intent1.putExtra("staffEmail",StaffEmail.getText().toString());
-                intent1.putExtra("staffName",StaffName.getText().toString());
+                intent1.putExtra("staffEmail", StaffEmail.getText().toString());
+                intent1.putExtra("staffName", StaffName.getText().toString());
                 startActivity(intent1);
             }
         });

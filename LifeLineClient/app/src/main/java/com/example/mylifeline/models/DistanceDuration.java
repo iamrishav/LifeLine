@@ -2,6 +2,7 @@ package com.example.mylifeline.models;
 /**
  * Created by Rishabh Gupta on 29-03-2019
  */
+
 import org.parceler.Parcel;
 
 

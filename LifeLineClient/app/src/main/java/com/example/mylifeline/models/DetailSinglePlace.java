@@ -2,6 +2,7 @@ package com.example.mylifeline.models;
 /**
  * Created by Rishabh Gupta on 29-03-2019
  */
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class DetailSinglePlace {
     private String placeId;
     private String vicinity;
     private float rating;
+
     public DetailSinglePlace() {
     }
 

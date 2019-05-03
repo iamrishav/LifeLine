@@ -41,6 +41,8 @@ public class RegisteredHospitalsDetails extends AppCompatActivity implements Nav
     DatabaseReference rootRef = db.getReference();
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +64,6 @@ public class RegisteredHospitalsDetails extends AppCompatActivity implements Nav
         tvWebsite = (TextView) findViewById(R.id.mytvWebsite);
         tvOpening = (TextView) findViewById(R.id.mytvOpening);
         btnCall = (Button) findViewById(R.id.mybtnCall);
-        btnDirections = (Button) findViewById(R.id.mybtnDirections);
         searchDoctor = findViewById(R.id.searchDoctor);
         final Intent intent = getIntent();
         String hospitalName = intent.getStringExtra("hospitalName");
@@ -80,11 +81,12 @@ public class RegisteredHospitalsDetails extends AppCompatActivity implements Nav
         });
 
 
+
         btnCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Intent.ACTION_DIAL);
-                i.setData(Uri.parse("tel:"+tvPhone.getText().toString()));
+                i.setData(Uri.parse("tel:" + tvPhone.getText().toString()));
                 startActivity(i);
             }
         });
@@ -102,7 +104,11 @@ public class RegisteredHospitalsDetails extends AppCompatActivity implements Nav
                 String hWebsite = dataSnapshot.child("hospitalWebsite").getValue().toString();
                 String hopening = dataSnapshot.child("hospitalHours").getValue().toString();
 
-                Picasso.get().load(url).into(imageView2);
+                try {
+                    Picasso.get().load(url).into(imageView2);
+                } catch (Exception e) {
+                    imageView2.setImageResource(R.drawable.avatar_default);
+                }
                 tvName.setText(hName);
                 tvAddress.setText(hAddress);
                 tvPhone.setText(hPhone);
@@ -136,6 +142,7 @@ public class RegisteredHospitalsDetails extends AppCompatActivity implements Nav
 
 
     }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
@@ -149,25 +156,26 @@ public class RegisteredHospitalsDetails extends AppCompatActivity implements Nav
                 startActivity(intent1);
                 break;
             case R.id.nav_TrackHospitals:
-                Intent intent2 = new Intent(RegisteredHospitalsDetails.this,HospitalLoacator.class);
+                Intent intent2 = new Intent(RegisteredHospitalsDetails.this, HospitalLoacator.class);
                 startActivity(intent2);
                 break;
             case R.id.nav_PreviousAppointments:
-                Intent intent3 = new Intent(RegisteredHospitalsDetails.this,BookedAppointments.class);
+                Intent intent3 = new Intent(RegisteredHospitalsDetails.this, BookedAppointments.class);
                 startActivity(intent3);
                 break;
             case R.id.nav_BookAppointments:
-                Intent intent4 = new Intent(RegisteredHospitalsDetails.this,FindDoctor.class);
+                Intent intent4 = new Intent(RegisteredHospitalsDetails.this, FindDoctor.class);
                 startActivity(intent4);
                 break;
             case R.id.nav_manage:
-                Intent intent5 = new Intent(RegisteredHospitalsDetails.this,AboutLifeLine.class);
+                Intent intent5 = new Intent(RegisteredHospitalsDetails.this, AboutLifeLine.class);
                 startActivity(intent5);
                 break;
         }
 
         return false;
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

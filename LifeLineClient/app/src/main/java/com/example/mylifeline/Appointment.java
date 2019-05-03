@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -28,31 +27,25 @@ import android.widget.Toast;
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
 import java.util.HashMap;
 
-public class Appointment extends AppCompatActivity  implements  NavigationView.OnNavigationItemSelectedListener{
+public class Appointment extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     FirebaseDatabase mAuth = FirebaseDatabase.getInstance();
     DatabaseReference rootRef = mAuth.getReference();
-
-
+    DatabaseReference userRef = rootRef.child("appointment");
+    String date, time;
+    String name;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
-    DatabaseReference userRef = rootRef.child("appointment");
-    String date,time;
     private Button book;
     private EditText editText;
     private DatePicker datePicker;
     private TimePicker timePicker;
-
-    String name;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -83,7 +76,7 @@ public class Appointment extends AppCompatActivity  implements  NavigationView.O
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             // Name, email address, and profile photo Url
-             name = user.getDisplayName();
+            name = user.getDisplayName();
             String email = user.getEmail();
             Uri photoUrl = user.getPhotoUrl();
 
@@ -110,23 +103,22 @@ public class Appointment extends AppCompatActivity  implements  NavigationView.O
         timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-                time = hourOfDay+":"+minute;
+                time = hourOfDay + ":" + minute;
             }
         });
-
 
 
         book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HashMap<String,String> hashMap = new HashMap<>();
-                hashMap.put("date",date);
-                hashMap.put("time",time);
-                hashMap.put("problem",editText.getText().toString());
-                hashMap.put("name",name);
-                hashMap.put("email",staffEmail);
-                hashMap.put("doctorName",doctorName);
-                hashMap.put("status","pending");
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put("date", date);
+                hashMap.put("time", time);
+                hashMap.put("problem", editText.getText().toString());
+                hashMap.put("name", name);
+                hashMap.put("email", staffEmail);
+                hashMap.put("doctorName", doctorName);
+                hashMap.put("status", "pending");
                 userRef.child(editText.getText().toString()).setValue(hashMap);
 
                 Toast.makeText(Appointment.this, "Your appointment is send to doctor, and yet to be confirm, check later", Toast.LENGTH_LONG).show();
@@ -135,8 +127,8 @@ public class Appointment extends AppCompatActivity  implements  NavigationView.O
         });
 
 
-
     }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
@@ -150,25 +142,26 @@ public class Appointment extends AppCompatActivity  implements  NavigationView.O
                 startActivity(intent1);
                 break;
             case R.id.nav_TrackHospitals:
-                Intent intent2 = new Intent(Appointment.this,HospitalLoacator.class);
+                Intent intent2 = new Intent(Appointment.this, HospitalLoacator.class);
                 startActivity(intent2);
                 break;
             case R.id.nav_PreviousAppointments:
-                Intent intent3 = new Intent(Appointment.this,BookedAppointments.class);
+                Intent intent3 = new Intent(Appointment.this, BookedAppointments.class);
                 startActivity(intent3);
                 break;
             case R.id.nav_BookAppointments:
-                Intent intent4 = new Intent(Appointment.this,FindDoctor.class);
+                Intent intent4 = new Intent(Appointment.this, FindDoctor.class);
                 startActivity(intent4);
                 break;
             case R.id.nav_manage:
-                Intent intent5 = new Intent(Appointment.this,AboutLifeLine.class);
+                Intent intent5 = new Intent(Appointment.this, AboutLifeLine.class);
                 startActivity(intent5);
                 break;
         }
 
         return false;
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

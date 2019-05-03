@@ -43,9 +43,9 @@ public class dashboard extends AppCompatActivity implements NavigationView.OnNav
     private ActionBarDrawerToggle mToggle;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser = mAuth.getCurrentUser();
+    DatabaseReference userRef = myRootRef.child("hospital_lists").child(firebaseUser.getUid()).child("staff_lists");
     private CardView staffList;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    DatabaseReference userRef = myRootRef.child("hospital_lists").child(firebaseUser.getUid()).child("staff_lists");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,7 +132,7 @@ public class dashboard extends AppCompatActivity implements NavigationView.OnNav
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
-        adapter = new Adapter(staffListItems,this);
+        adapter = new Adapter(staffListItems, this);
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);

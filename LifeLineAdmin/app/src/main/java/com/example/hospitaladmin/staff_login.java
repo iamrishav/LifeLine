@@ -71,8 +71,8 @@ public class staff_login extends AppCompatActivity {
                 String password = dataSnapshot.child("password").getValue().toString();
                 if (myEmail.equals(email) && myPassword.equals(password)) {
                     Toast.makeText(staff_login.this, "Login Success", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(staff_login.this,StaffDashboard.class);
-                    intent.putExtra("staffEmail",myEmail);
+                    Intent intent = new Intent(staff_login.this, StaffDashboard.class);
+                    intent.putExtra("staffEmail", myEmail);
                     startActivity(intent);
 
                 } else {

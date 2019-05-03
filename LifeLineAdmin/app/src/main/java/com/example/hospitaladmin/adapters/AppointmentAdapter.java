@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.hospitaladmin.AppointmentItem;
@@ -50,16 +49,13 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ctx, AppointmentListDetails.class);
-                intent.putExtra("name",currentItem.getMname());
-                intent.putExtra("problem",currentItem.getMproblem());
+                intent.putExtra("name", currentItem.getMname());
+                intent.putExtra("problem", currentItem.getMproblem());
                 ctx.startActivity(intent);
             }
         });
 
     }
-
-
-
 
 
     @Override
@@ -68,7 +64,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView textName,textTime,textProblem;
+        public TextView textName, textTime, textProblem;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

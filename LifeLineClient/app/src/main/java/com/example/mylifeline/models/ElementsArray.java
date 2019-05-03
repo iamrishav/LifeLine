@@ -9,7 +9,6 @@ import org.parceler.Parcel;
 import java.util.ArrayList;
 
 
-
 @Parcel
 public class ElementsArray {
     ArrayList<DistanceDuration> elements;

@@ -1,9 +1,9 @@
 package com.example.mylifeline;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -22,12 +22,11 @@ public class BookedAppointments extends AppCompatActivity {
     FirebaseDatabase db = FirebaseDatabase.getInstance();
     DatabaseReference myRootRef = db.getReference();
     DatabaseReference appointmentRef = myRootRef.child("appointment");
+    String TAG = "HL";
+    ArrayList<BookedListItem> bookedListItems = new ArrayList<>();
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    String TAG = "HL";
-    ArrayList<BookedListItem> bookedListItems = new ArrayList<>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +40,7 @@ public class BookedAppointments extends AppCompatActivity {
     }
 
 
-    public void getData(){
+    public void getData() {
 
 
         appointmentRef.addChildEventListener(new ChildEventListener() {
@@ -58,13 +57,11 @@ public class BookedAppointments extends AppCompatActivity {
                 String myName = getIntent().getStringExtra("name");
 
 
-
-                Log.d(TAG,"test"+doctorName + " " + date + " " + problemn + " " + time+" "+status+ " " );
-
+                Log.d(TAG, "test" + doctorName + " " + date + " " + problemn + " " + time + " " + status + " ");
 
 
-                if(myName.equals(name)) {
-                    bookedListItems.add(new BookedListItem(doctorName,date,time,problemn,status));
+                if (myName.equals(name)) {
+                    bookedListItems.add(new BookedListItem(doctorName, date, time, problemn, status));
                     adapter.notifyDataSetChanged();
                 }
 
@@ -96,7 +93,7 @@ public class BookedAppointments extends AppCompatActivity {
         recyclerView = findViewById(R.id.bookedrecyclerView);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
-        adapter = new BookedAdapter(bookedListItems,this);
+        adapter = new BookedAdapter(bookedListItems, this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
     }

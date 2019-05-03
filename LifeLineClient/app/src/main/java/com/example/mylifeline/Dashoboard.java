@@ -121,11 +121,11 @@ public class Dashoboard extends AppCompatActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        String name ="";
+        String name = "";
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             // Name, email address, and profile photo Url
-             name = user.getDisplayName();
+            name = user.getDisplayName();
             String email = user.getEmail();
             Uri photoUrl = user.getPhotoUrl();
 
@@ -144,7 +144,7 @@ public class Dashoboard extends AppCompatActivity implements View.OnClickListene
                 break;
             case R.id.previous_appointmet:
                 Intent previousAppointmetIntent = new Intent(Dashoboard.this, BookedAppointments.class);
-                previousAppointmetIntent.putExtra("name",name);
+                previousAppointmetIntent.putExtra("name", name);
                 startActivity(previousAppointmetIntent);
                 break;
             case R.id.track_hospital:
@@ -172,7 +172,7 @@ public class Dashoboard extends AppCompatActivity implements View.OnClickListene
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(Dashoboard.this,MainActivity.class);
+        Intent intent = new Intent(Dashoboard.this, MainActivity.class);
         startActivity(intent);
     }
 
@@ -194,7 +194,6 @@ public class Dashoboard extends AppCompatActivity implements View.OnClickListene
     }
 
 
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
@@ -208,19 +207,19 @@ public class Dashoboard extends AppCompatActivity implements View.OnClickListene
                 startActivity(intent1);
                 break;
             case R.id.nav_TrackHospitals:
-                Intent intent2 = new Intent(Dashoboard.this,HospitalLoacator.class);
+                Intent intent2 = new Intent(Dashoboard.this, HospitalLoacator.class);
                 startActivity(intent2);
                 break;
             case R.id.nav_PreviousAppointments:
-                Intent intent3 = new Intent(Dashoboard.this,BookedAppointments.class);
+                Intent intent3 = new Intent(Dashoboard.this, BookedAppointments.class);
                 startActivity(intent3);
                 break;
             case R.id.nav_BookAppointments:
-                Intent intent4 = new Intent(Dashoboard.this,FindDoctor.class);
+                Intent intent4 = new Intent(Dashoboard.this, FindDoctor.class);
                 startActivity(intent4);
                 break;
             case R.id.nav_manage:
-                Intent intent5 = new Intent(Dashoboard.this,AboutLifeLine.class);
+                Intent intent5 = new Intent(Dashoboard.this, AboutLifeLine.class);
                 startActivity(intent5);
                 break;
         }

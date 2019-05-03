@@ -19,7 +19,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.example.hospitaladmin.adapters.AppointmentAdapter;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,17 +29,16 @@ import java.util.ArrayList;
 
 public class StaffDashboard extends AppCompatActivity {
 
-ArrayList<AppointmentItem> appointmentItems = new ArrayList<>();
+    ArrayList<AppointmentItem> appointmentItems = new ArrayList<>();
 
     FirebaseDatabase db = FirebaseDatabase.getInstance();
     DatabaseReference myRootRef = db.getReference();
     DatabaseReference userRef = myRootRef.child("staff_login");
     DatabaseReference appointmentRef = myRootRef.child("appointment");
+    String TAG = "HL";
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    String TAG = "HL";
-
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
 
@@ -64,6 +62,7 @@ ArrayList<AppointmentItem> appointmentItems = new ArrayList<>();
 
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -72,9 +71,9 @@ ArrayList<AppointmentItem> appointmentItems = new ArrayList<>();
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (mToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
+//        if (mToggle.onOptionsItemSelected(item)) {
+//            return true;
+//        }
         switch (item.getItemId()) {
             case R.id.action_logout:
 //                FirebaseAuth.getInstance().signOut();
@@ -91,7 +90,7 @@ ArrayList<AppointmentItem> appointmentItems = new ArrayList<>();
         return super.onOptionsItemSelected(item);
     }
 
-    public void getData(){
+    public void getData() {
 
 
         appointmentRef.addChildEventListener(new ChildEventListener() {
@@ -103,11 +102,10 @@ ArrayList<AppointmentItem> appointmentItems = new ArrayList<>();
                 String problemn = dataSnapshot.child("problem").getValue().toString();
                 String email = dataSnapshot.child("email").getValue().toString();
                 String staffEmail = getIntent().getStringExtra("staffEmail");
-                Log.d(TAG,"test"+name + " " + time + " " + problemn );
+                Log.d(TAG, "test" + name + " " + time + " " + problemn);
 
 
-
-                if(email.equals(staffEmail)) {
+                if (email.equals(staffEmail)) {
                     appointmentItems.add(new AppointmentItem(name, time, problemn));
                     adapter.notifyDataSetChanged();
                 }
@@ -140,12 +138,10 @@ ArrayList<AppointmentItem> appointmentItems = new ArrayList<>();
         recyclerView = findViewById(R.id.staffRecycler);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
-        adapter = new AppointmentAdapter(appointmentItems,this);
+        adapter = new AppointmentAdapter(appointmentItems, this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
     }
-
-
 
 
 }

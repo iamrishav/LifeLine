@@ -47,7 +47,11 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.ViewHolder> 
         final StaffListItems currentItem = mStaffList.get(i);
         viewHolder.textName.setText(currentItem.getmName());
         viewHolder.textExpertise.setText(currentItem.getmExpertise());
-        Picasso.get().load(currentItem.getmImageUrl()).into(viewHolder.imageView);
+        try {
+            Picasso.get().load(currentItem.getmImageUrl()).into(viewHolder.imageView);
+        } catch (Exception e) {
+            viewHolder.imageView.setImageResource(R.drawable.avatar_default);
+        }
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

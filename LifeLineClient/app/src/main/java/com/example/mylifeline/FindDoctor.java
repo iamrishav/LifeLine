@@ -21,7 +21,7 @@ import android.widget.EditText;
 
 import com.firebase.ui.auth.AuthUI;
 
-public class FindDoctor extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class FindDoctor extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public static final String TAG = "HL";
     private static String myCity;
@@ -29,6 +29,7 @@ public class FindDoctor extends AppCompatActivity implements NavigationView.OnNa
     private EditText city;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,25 +82,26 @@ public class FindDoctor extends AppCompatActivity implements NavigationView.OnNa
                 startActivity(intent1);
                 break;
             case R.id.nav_TrackHospitals:
-                Intent intent2 = new Intent(FindDoctor.this,HospitalLoacator.class);
+                Intent intent2 = new Intent(FindDoctor.this, HospitalLoacator.class);
                 startActivity(intent2);
                 break;
             case R.id.nav_PreviousAppointments:
-                Intent intent3 = new Intent(FindDoctor.this,BookedAppointments.class);
+                Intent intent3 = new Intent(FindDoctor.this, BookedAppointments.class);
                 startActivity(intent3);
                 break;
             case R.id.nav_BookAppointments:
-                Intent intent4 = new Intent(FindDoctor.this,FindDoctor.class);
+                Intent intent4 = new Intent(FindDoctor.this, FindDoctor.class);
                 startActivity(intent4);
                 break;
             case R.id.nav_manage:
-                Intent intent5 = new Intent(FindDoctor.this,AboutLifeLine.class);
+                Intent intent5 = new Intent(FindDoctor.this, AboutLifeLine.class);
                 startActivity(intent5);
                 break;
         }
 
         return false;
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

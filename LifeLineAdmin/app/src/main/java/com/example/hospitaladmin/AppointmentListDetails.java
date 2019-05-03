@@ -1,8 +1,8 @@
 package com.example.hospitaladmin;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
@@ -12,17 +12,16 @@ import com.google.firebase.database.FirebaseDatabase;
 public class AppointmentListDetails extends AppCompatActivity {
 
 
-    private Button confirm,cancel,profile;
     FirebaseDatabase mAuth = FirebaseDatabase.getInstance();
     DatabaseReference rootRef = mAuth.getReference();
     DatabaseReference userRef = rootRef.child("appointment");
-
+    private Button confirm, cancel, profile;
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         finish();
-        
+
     }
 
     @Override
@@ -36,15 +35,12 @@ public class AppointmentListDetails extends AppCompatActivity {
         profile = findViewById(R.id.viewProfile);
 
 
-
-
-
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String name = getIntent().getStringExtra("name");
-                Intent intent = new Intent(AppointmentListDetails.this,PatientProfile.class);
-                intent.putExtra("name",name);
+                Intent intent = new Intent(AppointmentListDetails.this, PatientProfile.class);
+                intent.putExtra("name", name);
                 startActivity(intent);
 
 
@@ -67,7 +63,6 @@ public class AppointmentListDetails extends AppCompatActivity {
                 userRef.child(problem).removeValue();
             }
         });
-
 
 
     }

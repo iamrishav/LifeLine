@@ -1,11 +1,10 @@
 package com.example.hospitaladmin;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
@@ -20,8 +19,9 @@ public class PatientProfile extends AppCompatActivity {
     DatabaseReference rootRef = mAuth.getReference();
     DatabaseReference userRef = rootRef.child("profile");
 
-    private TextView bloodGroup,name, gender,address,state,country,pincode,email,mobile;
+    private TextView bloodGroup, name, gender, address, state, country, pincode, email, mobile;
     private Button call;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,15 +40,13 @@ public class PatientProfile extends AppCompatActivity {
         call = findViewById(R.id.patientbtnCall);
 
 
-
-
         userRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
 
                 String myBloodGroup = dataSnapshot.child("bloodGroup").getValue().toString();
-                String myName  = dataSnapshot.child("firstName").getValue().toString()+" "+dataSnapshot.child("lastName").getValue().toString();
+                String myName = dataSnapshot.child("firstName").getValue().toString() + " " + dataSnapshot.child("lastName").getValue().toString();
                 String myGender = dataSnapshot.child("gender").getValue().toString();
                 String myAddress = dataSnapshot.child("address").getValue().toString();
                 String myState = dataSnapshot.child("state").getValue().toString();
@@ -58,7 +56,7 @@ public class PatientProfile extends AppCompatActivity {
                 String myMobile = dataSnapshot.child("mobile").getValue().toString();
                 String checkName = getIntent().getStringExtra("name");
 
-                if(String.valueOf(checkName).toLowerCase().equals(String.valueOf(myName).toLowerCase())) {
+                if (String.valueOf(checkName).toLowerCase().equals(String.valueOf(myName).toLowerCase())) {
 
                     bloodGroup.setText(myBloodGroup);
                     name.setText(myName);
@@ -92,9 +90,6 @@ public class PatientProfile extends AppCompatActivity {
 
             }
         });
-
-
-
 
 
     }

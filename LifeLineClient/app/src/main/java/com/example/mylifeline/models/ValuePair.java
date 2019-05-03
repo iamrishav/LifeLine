@@ -7,7 +7,6 @@ package com.example.mylifeline.models;
 import org.parceler.Parcel;
 
 
-
 @Parcel
 public class ValuePair {
     String text;
